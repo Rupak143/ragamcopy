@@ -35,6 +35,10 @@
         <activity android:name=".InstructorSignupActivity" />
         <activity android:name=".InstructorHomeActivity"
             android:exported="false"/>
+        <activity android:name=".CreateCourseActivity" />
+        <activity android:name=".MyCoursesActivity" />
+        <activity android:name=".ViewStudentsActivity" />
+
 
 
 

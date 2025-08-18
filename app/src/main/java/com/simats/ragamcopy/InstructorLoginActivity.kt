@@ -37,12 +37,18 @@ class InstructorLoginActivity : ComponentActivity() {
                     startActivity(Intent(this, InstructorSignupActivity::class.java))
                 },
                 onLoginSuccess = { userData ->
+                    val email = userData.optString("email")
+
+                    // 🔧 ADD THIS: Save to SharedPreferences
+                    val sharedPref = getSharedPreferences("app_prefs", android.content.Context.MODE_PRIVATE)
+                    sharedPref.edit().putString("user_email", email).apply()
+
                     // Pass user data to home activity
                     val intent = Intent(this, InstructorHomeActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         putExtra("instructor_id", userData.optString("id"))
                         putExtra("instructor_name", "${userData.optString("first_name")} ${userData.optString("last_name")}")
-                        putExtra("instructor_email", userData.optString("email"))
+                        putExtra("instructor_email", email)
                         putExtra("login_source", "instructor")
                     }
                     startActivity(intent)
